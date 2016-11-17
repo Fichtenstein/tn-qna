@@ -96,12 +96,11 @@ RSpec.describe QuestionsController, type: :controller do
       it 'changes question arrtibutes' do
         patch(
           :update,
-          params: { id: question,
-                    question: { title: 'New title', body: 'New body' } }
+          params: { id: question, question: { title: 'NTitle', body: 'NBody' } }
         )
         question.reload
-        expect(question.title).to eq 'New title'
-        expect(question.body).to eq 'New body'
+        expect(question.title).to eq 'NTitle'
+        expect(question.body).to eq 'NBody'
       end
 
       it 'redirects to the question view' do
@@ -115,8 +114,7 @@ RSpec.describe QuestionsController, type: :controller do
       before do
         patch(
           :update,
-          params: { id: question,
-                    question: { title: nil, body: 'New body' } }
+          params: { id: question, question: { title: nil, body: 'NewBody' } }
         )
       end
       it 'changes question arrtibutes' do
@@ -125,7 +123,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'MyText'
       end
 
-      it 'reloads the update view' do
+      it 're-renders edit view' do
         expect(response).to render_template(:edit)
       end
     end
